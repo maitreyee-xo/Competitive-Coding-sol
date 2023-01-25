@@ -1,10 +1,10 @@
 class Solution {
     public int[] buildArray(int[] nums) {
-        int res[] = new int[nums.length];
-        for(int i = 0; i < nums.length;i++)
-        {
-            res[i] = nums[nums[i]];
-        }
-        return res;
+    int mask = 1023;
+	for(int i = 0; i < nums.length; i++)
+		nums[i] |= (nums[nums[i]] & mask) << 10;
+	for(int i = 0; i < nums.length; i++)
+		nums[i] = nums[i] >> 10;
+	return nums;
     }
 }
