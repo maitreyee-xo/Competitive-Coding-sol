@@ -16,16 +16,11 @@
 class Solution {
     int diff = Integer.MAX_VALUE;
     TreeNode prev;
-    private void traverse(TreeNode root)
-    {
-        if(root == null) return;
-        traverse(root.left);
+    public int minDiffInBST(TreeNode root) {
+        if(root.left != null) minDiffInBST(root.left);
         if(prev != null) diff = Math.min(diff, root.val - prev.val);
         prev = root;
-        traverse(root.right);
-    }
-    public int minDiffInBST(TreeNode root) {
-        traverse(root);
+        if(root.right != null) minDiffInBST(root.right);
         return diff;
     }
 }
