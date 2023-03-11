@@ -24,20 +24,25 @@
  * }
  */
 class Solution {
+    TreeNode sortedArrayToBST(ArrayList<Integer> arr, int left, int right)
+    {
+        if (left > right)    return null;
+        int mid = (left + right) / 2;
+        TreeNode node = new TreeNode(arr.get(mid));
+        node.left = sortedArrayToBST(arr, left, mid - 1);
+        node.right = sortedArrayToBST(arr, mid + 1, right);
+        return node;
+    }
     public TreeNode sortedListToBST(ListNode head) {
-        if(head ==  null) return null;
-        if(head.next==null) return new TreeNode(head.val);
-        ListNode slow=head;
-        ListNode fast=head.next.next;
-        while(fast!=null && fast.next!=null){
-            slow=slow.next;
-            fast=fast.next.next;
+        ArrayList<Integer> arr = new ArrayList<>();
+        int len= 0;
+        while(head !=null) 
+        {
+            arr.add(head.val);
+            head = head.next;
+            len++;
         }
-        TreeNode res=new TreeNode(slow.next.val);
-        ListNode righthalf=slow.next.next;
-        slow.next=null;
-        res.left=sortedListToBST(head);
-        res.right=sortedListToBST(righthalf);
-        return res;
+        TreeNode tree = sortedArrayToBST(arr, 0, len-1);
+        return tree;
     }
 }
