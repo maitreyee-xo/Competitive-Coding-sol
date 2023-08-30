@@ -1,5 +1,3 @@
-import java.util.*;
-
 class Solution {
     public List<Double> averageOfLevels(TreeNode root) {
         List<Double> averages = new ArrayList<>();
