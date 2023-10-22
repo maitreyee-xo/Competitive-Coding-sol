@@ -16,12 +16,17 @@ class Solution {
             temp = temp.next;
             size++;
         }
-        if (size < k)   return head;
-        
+
+        if (size < k) {
+            return head;
+        }
+
         ListNode current = head;
         ListNode prev = null;
         ListNode next = null;
+
         int count = 0;
+
         while (count < k && current != null) {
             next = current.next;
             current.next = prev;
@@ -29,7 +34,24 @@ class Solution {
             current = next;
             count++;
         }
-        if (next != null)   head.next = reverseKGroup(next, k);
+
+        if (next != null) {
+            head.next = reverseKGroup(next, k);
+        }
+
+        return prev;
+    }
+    
+    public ListNode reversing(ListNode head) {
+        ListNode current = head;
+        ListNode prev = null;
+        ListNode next;
+        while (current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
         return prev;
     }
 }
